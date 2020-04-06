@@ -292,7 +292,7 @@ Vous pouvez aussi utiliser des captures Wireshark ou des fichiers snort.log.xxxx
 
 ---
 
-**Reponse :**  car nous n'avons pas configuré de préprocesseur pour la règle que nous venons de creer
+**Reponse :**  car nous n'avons pas configuré de préprocesseur pour la règle que nous venons de créer, pour cela nous devons faire ``snort -v -c /etc/snort/mysnort.conf`` pour charger les préprocesseur pour autant qu'il activé dans notre configuration
 
 ---
 
@@ -308,7 +308,7 @@ alert tcp any any -> any any (msg:"Mon nom!"; content:"Rubinstein"; sid:4000015;
 
 ---
 
-**Reponse :**  
+**Reponse :**  La règle affiche un message et écrit dans les journaux si Snort détecte un packet venant de n’importe quel réseau TCP avec n’importe quel adresse vers un réseau quelconque sur un port quelconque et qui contient la chaîne de caractère __Rubinstein__
 
 ---
 
@@ -322,7 +322,7 @@ sudo snort -c myrules.rules -i eth0
 
 ---
 
-**Reponse :**  
+**Reponse :**  Snort nous affiche tout les packets qu'il capture sur notre interface
 
 ---
 
@@ -332,7 +332,7 @@ Aller à un site web contenant dans son text votre nom ou votre mot clé que vou
 
 ---
 
-**Reponse :**  
+**Reponse :**  LOL rien, je pige pas
 
 ---
 
@@ -342,7 +342,10 @@ Arrêter Snort avec `CTRL-C`.
 
 ---
 
-**Reponse :**  
+**Reponse :**  On voit un récapitulatif qui comprend
+
+- Le nombre de packet capturé et traité par Snort
+- Un récapitulatif de l'usage de la mémoire
 
 ---
 
@@ -356,7 +359,6 @@ Aller au répertoire /var/log/snort. Ouvrir le fichier `alert`. Vérifier qu'il 
 **Reponse :**  
 
 ---
-
 
 --
 
@@ -382,19 +384,17 @@ Ecrire une règle qui alerte à chaque fois que votre système reçoit un ping d
 
 ---
 
-**Reponse :**  
+**Reponse :**  ``alert icmp !192.168.1.120 -> 192.168.1.120 any (msg:"Ping";)``
 
 ---
-
 
 **Question 10: Comment avez-vous fait pour que ça identifie seulement les pings entrants ?**
 
 ---
 
-**Reponse :**  
+**Reponse :**  On utilise la règle qui nous permet de spécifier toutes les adresse sauf la même que la notre (ici 192.168.1.120)
 
 ---
-
 
 **Question 11: Où le message a-t-il été journalisé ?**
 
@@ -403,7 +403,6 @@ Ecrire une règle qui alerte à chaque fois que votre système reçoit un ping d
 **Reponse :**  
 
 ---
-
 
 **Question 12: Qu'est-ce qui a été journalisé ?**
 

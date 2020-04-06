@@ -6,7 +6,7 @@
 
 Clonez le repo sur votre machine. Vous pouvez répondre aux questions en modifiant directement votre clone du README.md ou avec un fichier pdf que vous pourrez uploader sur votre fork.
 
-**Le rendu consiste simplement à répondre à toutes les questions clairement identifiées dans le text avec la mention "Question" et à les accompagner avec des captures. Le rendu doit se faire par une "pull request". Envoyer également le hash du dernier commit et votre username GitHub par email au professeur et à l'assistant**
+**Le rendu consiste simplement à répondre à toutes les questions clairement identifiées dans le texte avec la mention "Question" et à les accompagner avec des captures. Le rendu doit se faire par une "pull request". Envoyer également le hash du dernier commit et votre username GitHub par email au professeur et à l'assistant**
 
 ## Table de matières
 
@@ -27,7 +27,7 @@ Clonez le repo sur votre machine. Vous pouvez répondre aux questions en modifia
 [Travail à effectuer](#exercises)
 
 
-## Echéance 
+## Échéance 
 
 Ce travail devra être rendu le dimanche après la fin de la 2ème séance de laboratoire, soit au plus tard, **le 6 avril 2020, à 23h59.**
 
@@ -104,7 +104,7 @@ Pour arrêter Snort, il suffit d'utiliser `CTRL-C` (**attention** : il peut arri
 
 ## Utilisation comme un IDS
 
-Pour enregistrer seulement les alertes et pas tout le trafic, on execute Snort en mode IDS. Il faudra donc spécifier un fichier contenant des règles. 
+Pour enregistrer seulement les alertes et pas tout le trafic, on exécute Snort en mode IDS. Il faudra donc spécifier un fichier contenant des règles. 
 
 Il faut noter que `/etc/snort/snort.config` contient déjà des références aux fichiers de règles disponibles avec l'installation par défaut. Si on veut tester Snort avec des règles simples, on peut créer un fichier de config personnalisé (par exemple `mysnort.conf`) et importer un seul fichier de règles utilisant la directive "include".
 
@@ -120,16 +120,16 @@ Ensuite, créez le fichier de règles `icmp2.rules` dans le repertoire `/etc/sno
 
 `alert icmp any any -> any any (msg:"ICMP Packet"; sid:4000001; rev:3;)`
 
-On peut maintenant executer la commande :
+On peut maintenant exécuter la commande :
 
 ```
 snort -c /etc/snort/mysnort.conf
 ```
 
-Vous pouvez maintenant faire quelques pings depuis votre hôte et regarder les résultas dans le fichier d'alertes contenu dans le repertoire `/var/log/snort/`. 
+Vous pouvez maintenant faire quelques pings depuis votre hôte et regarder les résultats dans le fichier d'alertes contenu dans le répertoire `/var/log/snort/`. 
 
 
-## Ecriture de règles
+## Écriture de règles
 
 Snort permet l'écriture de règles qui décrivent des tentatives de exploitation de vulnérabilités bien connues. Les règles Snort prennent en charge à la fois, l'analyse de protocoles et la recherche et identification de contenu.
 
@@ -149,10 +149,10 @@ alert tcp any any -> 192.168.1.0/24 111 (content:"|00 01 86 a5|"; msg: "mountd a
 Cette règle décrit une alerte générée quand Snort trouve un paquet avec tous les attributs suivants :
 
 * C'est un paquet TCP
-* Emis depuis n'importe quelle adresse et depuis n'importe quel port
+* Émis depuis n'importe quelle adresse et depuis n'importe quel port
 * A destination du réseau identifié par l'adresse 192.168.1.0/24 sur le port 111
 
-Le text jusqu'au premier parenthèse est l'entête de la règle. 
+Le texte jusqu'au premier parenthèse est l'entête de la règle. 
 
 ```
 alert tcp any any -> 192.168.1.0/24 111
@@ -171,11 +171,11 @@ alert tcp any any -> any 21 (content:"site exec"; content:"%"; msg:"site
 exec buffer overflow attempt";)
 ```
 
-La clé "content" apparait deux fois parce que les deux strings qui doivent être détectés n'apparaissent pas concaténés dans le paquet mais à des endroits différents. Pour que la règle soit déclenchée, il faut que le paquet contienne **les deux strings** "site exec" et "%". 
+La clé "content" apparaît deux fois parce que les deux strings qui doivent être détectés n'apparaissent pas concaténés dans le paquet mais à des endroits différents. Pour que la règle soit déclenchée, il faut que le paquet contienne **les deux strings** "site exec" et "%". 
 
 Les éléments dans les options d'une règle sont traitées comme un AND logique. La liste complète de règles sont traitées comme une succession de OR.
 
-## Informations de base pour le règles
+## Informations de base pour les règles
 
 ### Actions :
 
@@ -196,12 +196,12 @@ Le premier champ dans le règle c'est l'action. L'action dit à Snort ce qui doi
 
 ### Protocoles :
 
-Le champ suivant c'est le protocole. Il y a trois protocoles IP qui peuvent être analysez par Snort : TCP, UDP et ICMP.
+Le champ suivant c'est le protocole. Il y a trois protocoles IP qui peuvent être analyser par Snort : TCP, UDP et ICMP.
 
 
 ### Adresses IP :
 
-La section suivante traite les adresses IP et les numéros de port. Le mot `any` peut être utilisé pour définir "n'import quelle adresse". On peut utiliser l'adresse d'une seule machine ou un block avec la notation CIDR. 
+La section suivante traite les adresses IP et les numéros de port. Le mot `any` peut être utilisé pour définir "n’importe quelle adresse". On peut utiliser l'adresse d'une seule machine ou un block avec la notation CIDR. 
 
 Un opérateur de négation peut être appliqué aux adresses IP. Cet opérateur indique à Snort d'identifier toutes les adresses IP sauf celle indiquée. L'opérateur de négation est le `!`.
 
@@ -276,25 +276,23 @@ tcpdump -r /var/log/snort/snort.log.xxxxxxxxxx
 
 Vous pouvez aussi utiliser des captures Wireshark ou des fichiers snort.log.xxxxxxxxx comme source d'analyse por Snort.
 
-## Exercises
+## Exercices
 
 **Réaliser des captures d'écran des exercices suivants et les ajouter à vos réponses.**
 
 ### Essayer de répondre à ces questions en quelques mots :
 
-**Question 1: Qu'est ce que signifie les "preprocesseurs" dans le contexte de Snort ?**
+**Question 1: Qu'est ce que signifie les "préprocesseurs" dans le contexte de Snort ?**
 
 ---
 
-**Reponse :**  
-
----
+**Reponse :**  Les préprocesseurs permettent l’extension des fonctionnalité de Snort en permettant à d'autre développeur ou utilisateur de créer de nouveau plugin plus aisément. les préprocesseur s'active après la détection des packet, ils peuvent effectuer des action diverse sur le packet capturé.
 
 **Question 2: Pourquoi êtes vous confronté au WARNING suivant `"No preprocessors configured for policy 0"` lorsque vous exécutez la commande `snort` avec un fichier de règles ou de configuration "home-made" ?**
 
 ---
 
-**Reponse :**  
+**Reponse :**  car nous n'avons pas configuré de préprocesseur pour la règle que nous venons de creer
 
 ---
 

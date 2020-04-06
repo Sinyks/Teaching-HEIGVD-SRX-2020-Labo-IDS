@@ -393,7 +393,7 @@ __Où 91.198.174.192 est l’adresse IP actuel de Wikipédia.org__
 
 __Ce message a été journalisé dans /var/log/snort/snort.log.xxxxxxxx ou xxxxxxx est la date en timestamp__
 
-Toute les informations du paquet (le format est lisible par wireshark)
+__Toute les informations du paquet (le format est lisible par wireshark)__
 
 ---
 
@@ -407,7 +407,7 @@ Ecrire une règle qui alerte à chaque fois que votre système reçoit un ping d
 
 ---
 
-**Reponse :**  ``alert icmp !192.168.1.120 -> 192.168.1.120 any (msg:"Ping";)``
+**Reponse :**  ``alert icmp !192.168.1.120 any  -> 192.168.1.120 any (msg:"Ping from other";itype:8 ;sid:4000017; rev:1;)``
 
 ---
 
@@ -415,7 +415,7 @@ Ecrire une règle qui alerte à chaque fois que votre système reçoit un ping d
 
 ---
 
-**Reponse :**  On utilise la règle qui nous permet de spécifier toutes les adresse sauf la même que la notre (ici 192.168.1.120)
+**Reponse :**  On utilise la règle qui nous permet de spécifier toutes les adresse sauf la même que la notre (ici 192.168.1.120) et l'on spécifie que l'on ne journalise que les messages de type __echo-request__ (évite que les echo reply soit journalisé)
 
 ---
 
@@ -423,7 +423,7 @@ Ecrire une règle qui alerte à chaque fois que votre système reçoit un ping d
 
 ---
 
-**Reponse :**  
+**Reponse :**  dans ``/var/log/snort/alert`` l'alerte est stocké ainsi que dans ``/var/log/snort/snort.log.xxxxxx``
 
 ---
 
@@ -431,7 +431,7 @@ Ecrire une règle qui alerte à chaque fois que votre système reçoit un ping d
 
 ---
 
-**Reponse :**  
+**Reponse :**  Toutes les information du paquet (hormis le echo response)
 
 ---
 
@@ -441,35 +441,36 @@ Ecrire une règle qui alerte à chaque fois que votre système reçoit un ping d
 
 Modifier votre règle pour que les pings soient détectés dans les deux sens.
 
-**Question 13: Qu'est-ce que vous avez modifié pour que la règle détecte maintenant le trafic dans les deux senses ?**
+**Question 13: Qu'est-ce que vous avez modifié pour que la règle détecte maintenant le trafic dans les deux sens ?**
 
 ---
 
-**Reponse :**  
+**Reponse :**  ``? on ne comprend pas très bien``
 
 ---
 
 
 --
 
-### Detecter une tentative de login SSH
+### Détecter une tentative de login SSH
 
-Essayer d'écrire une règle qui Alerte qu'une tentative de session SSH a été faite depuis la machine d'un voisin (je sais que la situation actuelle du Covid-19 ne vous permet pas de vous mettre ensemble... utilisez votre imagination pour trouver la solution à cette question !). Si vous avez besoin de plus d'information sur ce qui décrit cette tentative (adresses, ports, protocoles), servez-vous de Wireshark pour analyser les échanges lors de la requête de connexion depuis votre voisi.
+Essayer d'écrire une règle qui Alerte qu'une tentative de session SSH a été faite depuis la machine d'un voisin (je sais que la situation actuelle du Covid-19 ne vous permet pas de vous mettre ensemble... utilisez votre imagination pour trouver la solution à cette question !). Si vous avez besoin de plus d'information sur ce qui décrit cette tentative (adresses, ports, protocoles), servez-vous de Wireshark pour analyser les échanges lors de la requête de connexion depuis votre voisin.
 
 **Question 14: Quelle est votre règle ? Montrer la règle et expliquer en détail comment elle fonctionne.**
 
 ---
 
-**Reponse :**  
+**Reponse :**  ``alert !192.168.1.120 any -> 192.168.1.120 22 (msg:"SSH connection from outside";flags: S+;sid:4000017; rev:1;)``
+
+Ici l'alerte est déclenché dès lors qu'une machine externe à la notre initie une connexion sur le port 22, (détecte le SYN). 
 
 ---
-
 
 **Question 15: Montrer le message d'alerte enregistré dans le fichier d'alertes.** 
 
 ---
 
-**Reponse :**  
+**Reponse :**  ![](/home/splinux/Documents/git/SRX/Teaching-HEIGVD-SRX-2020-Labo-IDS/images/alert_ssh.png)
 
 ---
 
@@ -483,7 +484,7 @@ Lancer Wireshark et faire une capture du trafic sur l'interface connectée au br
 
 ---
 
-**Reponse :**  
+**Reponse :**  Il faut utiliser l'option ``-r <fichier>``
 
 ---
 
@@ -493,7 +494,7 @@ Utiliser l'option correcte de Snort pour analyser le fichier de capture Wireshar
 
 ---
 
-**Reponse :**  
+**Reponse :**  Le fonctionnement est quasiment identique cependant on dénote que la date de journalisation correspond à celle du PCAP
 
 ---
 
@@ -501,7 +502,7 @@ Utiliser l'option correcte de Snort pour analyser le fichier de capture Wireshar
 
 ---
 
-**Reponse :**  
+**Reponse :**  Oui
 
 ---
 
@@ -515,7 +516,7 @@ Faire des recherches à propos des outils `fragroute` et `fragtest`.
 
 ---
 
-**Reponse :**  
+**Reponse :**  Ces outils permettent de fragmenter les message icmp, afin de contourner les firewall et IDS/IPS
 
 ---
 
@@ -524,12 +525,11 @@ Faire des recherches à propos des outils `fragroute` et `fragtest`.
 
 ---
 
-**Reponse :**  
+**Reponse :**  Ces outils fragmentent les paquet afin que les systèmes de détection ne puisse pas reconnaître des payloads en blacklist.
 
 ---
 
-
-**Question 22: Qu'est-ce que le `Frag3 Preprocessor` ? A quoi ça sert et comment ça fonctionne ?**
+questionnement-ce que le `Frag3 Preprocessor` ? A quoi ça sert et comment ça fonctionne ?**
 
 ---
 

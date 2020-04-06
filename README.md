@@ -533,7 +533,7 @@ questionnement-ce que le `Frag3 Preprocessor` ? A quoi ça sert et comment ça f
 
 ---
 
-**Reponse :**  
+**Reponse :**  Ce préprocesseur sert à réassembler les fragments de message afin de contrer les technique dites d'évasion, pour cela il procède à une analyse "Target-based" 
 
 ---
 
@@ -552,7 +552,6 @@ Reprendre l'exercice de la partie [Trouver votre nom](#trouver-votre-nom-). Essa
 
 Modifier le fichier `myrules.rules` pour que snort utiliser le `Frag3 Preprocessor` et refaire la tentative.
 
-
 **Question 24: Quel est le résultat ?**
 
 ---
@@ -561,12 +560,11 @@ Modifier le fichier `myrules.rules` pour que snort utiliser le `Frag3 Preprocess
 
 ---
 
-
 **Question 25: A quoi sert le `SSL/TLS Preprocessor` ?**
 
 ---
 
-**Reponse :**  
+**Reponse :**  Il permet d'inspecter les connections chiffrée et détermine si la connection est valide
 
 ---
 
@@ -575,7 +573,7 @@ Modifier le fichier `myrules.rules` pour que snort utiliser le `Frag3 Preprocess
 
 ---
 
-**Reponse :**  
+**Reponse :**  Il permet la detéction et le filtrage des donnée personnelle (comme des numéro de carte de crédit, compte banquaire)
 
 ---
 
@@ -586,7 +584,7 @@ Modifier le fichier `myrules.rules` pour que snort utiliser le `Frag3 Preprocess
 
 ---
 
-**Reponse :**  
+**Reponse :**  Au vue de ses nombreuses fonctionnalité, snort est un outils complet et très puissant et d'autant plus intéressant qu'il peut s'améliorer à l'aide de divers module (preprocessor).
 
 ---
 

@@ -286,13 +286,13 @@ Vous pouvez aussi utiliser des captures Wireshark ou des fichiers snort.log.xxxx
 
 ---
 
-**Reponse :**  Les préprocesseurs permettent l’extension des fonctionnalité de Snort en permettant à d'autre développeur ou utilisateur de créer de nouveau plugin plus aisément. les préprocesseur s'active après la détection des packet, ils peuvent effectuer des action diverse sur le packet capturé.
+**Reponse :**  Les préprocesseurs permettent l’extension des fonctionnalité de Snort en permettant à d'autre développeur ou utilisateur de créer de nouveau plugin plus aisément. Les préprocesseur s'active avant le traitement des packet, ils peuvent effectuer des action diverse sur le packet capturé.
 
 **Question 2: Pourquoi êtes vous confronté au WARNING suivant `"No preprocessors configured for policy 0"` lorsque vous exécutez la commande `snort` avec un fichier de règles ou de configuration "home-made" ?**
 
 ---
 
-**Reponse :**  car nous n'avons pas configuré de préprocesseur pour la règle que nous venons de créer, pour cela nous devons faire ``snort -v -c /etc/snort/mysnort.conf`` pour charger les préprocesseur pour autant qu'il soit activé dans notre configuration, nous réutiliserons les préprocesseur par défaut
+**Reponse :**  Car nous n'avons pas spécifié de préprocesseurs dans le fichier de config au lancement de snort
 
 ---
 
@@ -308,7 +308,7 @@ alert tcp any any -> any any (msg:"Mon nom!"; content:"Rubinstein"; sid:4000015;
 
 ---
 
-**Reponse :**  La règle affiche un message et écrit dans les journaux si Snort détecte un packet venant de n’importe quel réseau TCP avec n’importe quel adresse vers un réseau quelconque sur un port quelconque et qui contient la chaîne de caractère __Rubinstein__
+**Reponse :**  La règle déclenche une alerte et écrit dans les journaux si Snort détecte un packet venant de n’importe quel réseau TCP avec n’importe quel adresse vers un réseau quelconque sur un port quelconque et qui contient la chaîne de caractère __Rubinstein__
 
 ---
 
@@ -322,13 +322,7 @@ sudo snort -c myrules.rules -i eth0
 
 ---
 
-**Reponse :**  Snort nous affiche tout les packets qu'il capture sur notre interface, on voit :
-
-- les adresses de sources et de destination
-- les ports sources et destinations
-- le protocole IP utilisé
-- les entête du protocole
-- la date
+**Reponse :**  
 
 ---
 

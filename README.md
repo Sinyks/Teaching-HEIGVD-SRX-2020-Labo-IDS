@@ -322,7 +322,7 @@ sudo snort -c myrules.rules -i eth0
 
 ---
 
-**Reponse :**  
+**Reponse :**  Nous observons toujours des Warning pour les préprocesseurs, cependant leur apparition dépend des packets capturé
 
 ---
 
@@ -332,7 +332,7 @@ Aller à un site web contenant dans son text votre nom ou votre mot clé que vou
 
 ---
 
-**Reponse :**  LOL rien, je pige pas
+**Reponse :**  L'apparition de ligne supplémentaires
 
 ---
 
@@ -349,8 +349,9 @@ Arrêter Snort avec `CTRL-C`.
 - La proportion de packet reçu/traité en fonction de leur protocole
 - Le nombre de packet ayant : 
   - Lancés des alertes
-  - Produit des logs 
+  - Produit des journaux 
   - été ignorés
+  - été bloqué / autorisé
 - Les rapport des preprocesseur
 
 ---
@@ -362,7 +363,17 @@ Aller au répertoire /var/log/snort. Ouvrir le fichier `alert`. Vérifier qu'il 
 
 ---
 
-**Reponse :**  
+**Reponse :**  ![](./images/alert_log.png)
+
+On vit que l'alerte est composé de:
+- Du SID de la règle
+- De son message (flag msg)
+- Sa priorité
+- La date de l'échange
+- Le sens de la communication
+- Les adresses et ports sources et destinations
+- Des entêtes IP du paquet (TTL, protocol de transport, TOS)
+- Des entêtes TCP (numéro de séquence, numero d'ACK, Win,...)
 
 ---
 
@@ -376,7 +387,13 @@ Aller au répertoire /var/log/snort. Ouvrir le fichier `alert`. Vérifier qu'il 
 
 ---
 
-**Reponse :**  
+**Reponse :**  ``log tcp 192.168.1.120 any -> 91.198.174.192 443 (msg:"Wikipedia Visite"; sid:4000016; rev:1;)``
+
+__Où 91.198.174.192 est l’adresse IP actuel de Wikipédia.org__
+
+__Ce message a été journalisé dans /var/log/snort/snort.log.xxxxxxxx ou xxxxxxx est la date en timestamp__
+
+Toute les informations du paquet (le format est lisible par wireshark)
 
 ---
 

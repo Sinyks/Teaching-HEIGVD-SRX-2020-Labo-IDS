@@ -292,7 +292,7 @@ Vous pouvez aussi utiliser des captures Wireshark ou des fichiers snort.log.xxxx
 
 ---
 
-**Reponse :**  car nous n'avons pas configuré de préprocesseur pour la règle que nous venons de créer, pour cela nous devons faire ``snort -v -c /etc/snort/mysnort.conf`` pour charger les préprocesseur pour autant qu'il activé dans notre configuration
+**Reponse :**  car nous n'avons pas configuré de préprocesseur pour la règle que nous venons de créer, pour cela nous devons faire ``snort -v -c /etc/snort/mysnort.conf`` pour charger les préprocesseur pour autant qu'il soit activé dans notre configuration, nous réutiliserons les préprocesseur par défaut
 
 ---
 
@@ -322,7 +322,13 @@ sudo snort -c myrules.rules -i eth0
 
 ---
 
-**Reponse :**  Snort nous affiche tout les packets qu'il capture sur notre interface
+**Reponse :**  Snort nous affiche tout les packets qu'il capture sur notre interface, on voit :
+
+- les adresses de sources et de destination
+- les ports sources et destinations
+- le protocole IP utilisé
+- les entête du protocole
+- la date
 
 ---
 
@@ -345,7 +351,13 @@ Arrêter Snort avec `CTRL-C`.
 **Reponse :**  On voit un récapitulatif qui comprend
 
 - Le nombre de packet capturé et traité par Snort
-- Un récapitulatif de l'usage de la mémoire
+- Un récapitulatif de l'utilisation de la mémoire
+- La proportion de packet reçu/traité en fonction de leur protocole
+- Le nombre de packet ayant : 
+  - Lancés des alertes
+  - Produit des logs 
+  - été ignorés
+- Les rapport des preprocesseur
 
 ---
 
@@ -362,9 +374,9 @@ Aller au répertoire /var/log/snort. Ouvrir le fichier `alert`. Vérifier qu'il 
 
 --
 
-### Detecter une visite à Wikipedia
+### Détecter une visite à Wikipedia
 
-Ecrire une règle qui journalise (sans alerter) un message à chaque fois que Wikipedia est visité **DEPUIS VOTRE** station. **Ne pas utiliser une règle qui détecte un string ou du contenu**.
+Écrire une règle qui journalise (sans alerter) un message à chaque fois que Wikipedia est visité **DEPUIS VOTRE** station. **Ne pas utiliser une règle qui détecte un string ou du contenu**.
 
 **Question 8: Quelle est votre règle ? Où le message a-t'il été journalisé ? Qu'est-ce qui a été journalisé ?**
 

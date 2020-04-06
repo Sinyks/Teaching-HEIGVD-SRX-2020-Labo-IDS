@@ -470,7 +470,7 @@ Ici l'alerte est déclenché dès lors qu'une machine externe à la notre initie
 
 ---
 
-**Reponse :**  ![](/home/splinux/Documents/git/SRX/Teaching-HEIGVD-SRX-2020-Labo-IDS/images/alert_ssh.png)
+**Reponse :**  ![](./images/alert_ssh.png)
 
 ---
 

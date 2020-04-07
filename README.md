@@ -1,6 +1,12 @@
 # Teaching-HEIGVD-SRX-2020-Laboratoire-IDS
 
-**Ce travail de laboratoire est à faire en équipes de 2 personnes** (oui... en remote...). Je vous laisse vous débrouiller ;-)
+```
+Etudiants : 
+	- Sacha Perdrizat
+	- Quentin Le Ray
+```
+
+Ce travail de laboratoire est à faire en équipes de 2 personnes** (oui... en remote...). Je vous laisse vous débrouiller ;-)
 
 **ATTENTION : Commencez par créer un Fork de ce repo et travaillez sur votre fork.**
 
@@ -274,7 +280,7 @@ Les fichiers log sont des fichiers binaires enregistrés en format pcap. Vous po
 tcpdump -r /var/log/snort/snort.log.xxxxxxxxxx
 ```
 
-Vous pouvez aussi utiliser des captures Wireshark ou des fichiers snort.log.xxxxxxxxx comme source d'analyse por Snort.
+Vous pouvez aussi utiliser des captures Wireshark ou des fichiers snort.log.xxxxxxxxx comme source d'analyse pour Snort.
 
 ## Exercices
 
@@ -332,7 +338,7 @@ Aller à un site web contenant dans son text votre nom ou votre mot clé que vou
 
 ---
 
-**Reponse :**  L'apparition de ligne supplémentaires
+**Reponse :**  L'apparition de Warning supplémentaire
 
 ---
 
@@ -352,7 +358,7 @@ Arrêter Snort avec `CTRL-C`.
   - Produit des journaux 
   - été ignorés
   - été bloqué / autorisé
-- Les rapport des preprocesseur
+- Les rapport des préprocesseur
 
 ---
 
@@ -393,7 +399,7 @@ __Où 91.198.174.192 est l’adresse IP actuel de Wikipédia.org__
 
 __Ce message a été journalisé dans /var/log/snort/snort.log.xxxxxxxx ou xxxxxxx est la date en timestamp__
 
-__Toute les informations du paquet (le format est lisible par wireshark)__
+__ Nous voyons toute les informations du paquet (le format est lisible par wireshark)__
 
 ---
 
@@ -415,7 +421,7 @@ Ecrire une règle qui alerte à chaque fois que votre système reçoit un ping d
 
 ---
 
-**Reponse :**  On utilise la règle qui nous permet de spécifier toutes les adresse sauf la même que la notre (ici 192.168.1.120) et l'on spécifie que l'on ne journalise que les messages de type __echo-request__ (évite que les echo reply soit journalisé)
+**Reponse :**  On utilise la règle qui nous permet de spécifier toutes les adresse sauf la notre (ici 192.168.1.120) et l'on spécifie que l'on ne journalise que les messages de type __echo-request__ (évite que les echo reply soit journalisé)
 
 ---
 
@@ -423,7 +429,7 @@ Ecrire une règle qui alerte à chaque fois que votre système reçoit un ping d
 
 ---
 
-**Reponse :**  dans ``/var/log/snort/alert`` l'alerte est stocké ainsi que dans ``/var/log/snort/snort.log.xxxxxx``
+**Reponse :**  dans ``/var/log/snort/alert`` l'alerte est stocké et son/ paquet dans ``/var/log/snort/snort.log.xxxxxx``
 
 ---
 
@@ -431,7 +437,7 @@ Ecrire une règle qui alerte à chaque fois que votre système reçoit un ping d
 
 ---
 
-**Reponse :**  Toutes les information du paquet (hormis le echo response)
+**Reponse :**  Toutes les information des paquets capturé (analysable par Wireshark)
 
 ---
 
@@ -445,10 +451,9 @@ Modifier votre règle pour que les pings soient détectés dans les deux sens.
 
 ---
 
-**Reponse :**  ``? on ne comprend pas très bien``
+**Reponse :**  ``alert icmp any any  -> 192.168.1.120 any (msg:"Ping from other";itype:8 ;sid:4000017; rev:1;)`` On change l'adresse de source par toute les adresse
 
 ---
-
 
 --
 
@@ -520,32 +525,30 @@ Faire des recherches à propos des outils `fragroute` et `fragtest`.
 
 ---
 
-
 **Question 21: Quel est le principe de fonctionnement ?**
 
 ---
 
-**Reponse :**  Ces outils fragmentent les paquet afin que les systèmes de détection ne puisse pas reconnaître des payloads en blacklist.
+**Reponse :**  Ces outils utilise la fragmentation des paquet comme moyen de contournement pour éviter les systèmes de détection.
 
 ---
 
-questionnement-ce que le `Frag3 Preprocessor` ? A quoi ça sert et comment ça fonctionne ?**
+**Question 22: Que-ce que le `Frag3 Preprocessor` ? A quoi ça sert et comment ça fonctionne ?**
 
 ---
 
-**Reponse :**  Ce préprocesseur sert à réassembler les fragments de message afin de contrer les technique dites d'évasion, pour cela il procède à une analyse "Target-based" 
+**Reponse :**  Ce préprocesseur sert à réassembler les fragments de message afin de contrer les technique dites d'évasion, pour cela il procède à une analyse "Target-based" (vérification des paquets ayant la même cible)
 
 ---
 
 
 Reprendre l'exercice de la partie [Trouver votre nom](#trouver-votre-nom-). Essayer d'offusquer la détection avec `fragroute`.
 
-
 **Question 23: Quel est le résultat de votre tentative ?**
 
 ---
 
-**Reponse :**  
+**Reponse :**  ``L'outil Fragroute n'étant pas disponible sur notre machine virtuelle/physiqe nous n'avons pas pu effectuation la manipulation, Nous avons essayé d'installer l'outils de plusieurs manières (compilation des sources, recherche sur les dépots de kali et autres) mais il n'est pas/plus disponible sur Kali au même titre que snort.``
 
 ---
 
@@ -564,16 +567,15 @@ Modifier le fichier `myrules.rules` pour que snort utiliser le `Frag3 Preprocess
 
 ---
 
-**Reponse :**  Il permet d'inspecter les connections chiffrée et détermine si la connection est valide
+**Reponse :**  Il permet d'inspecter les connections chiffrée afin de déterminer si la connexion est valide.
 
 ---
-
 
 **Question 26: A quoi sert le `Sensitive Data Preprocessor` ?**
 
 ---
 
-**Reponse :**  Il permet la detéction et le filtrage des donnée personnelle (comme des numéro de carte de crédit, compte banquaire)
+**Reponse :**  Il permet la détection et le filtrage des donnée personnelle (comme des numéro de carte de crédit, compte bancaire)
 
 ---
 

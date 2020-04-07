@@ -451,7 +451,7 @@ Modifier votre règle pour que les pings soient détectés dans les deux sens.
 
 ---
 
-**Reponse :**  ``alert icmp any any  -> 192.168.1.120 any (msg:"Ping from other";itype:8 ;sid:4000017; rev:1;)`` On change l'adresse de source par toute les adresse
+**Reponse :**  ``alert icmp !192.168.1.120 any <> 192.168.1.120 any (msg:"Ping from other";itype:8 ;sid:4000017; rev:1;)``Il suffit de changer la direction de la requête (->) pour l’opérateur bidirectionnel (<>)
 
 ---
 

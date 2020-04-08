@@ -548,7 +548,7 @@ Reprendre l'exercice de la partie [Trouver votre nom](#trouver-votre-nom-). Essa
 
 ---
 
-**Reponse :**  ``L'outil Fragroute n'étant pas disponible sur notre machine virtuelle/physiqe nous n'avons pas pu effectuation la manipulation, Nous avons essayé d'installer l'outils de plusieurs manières (compilation des sources, recherche sur les dépots de kali et autres) mais il n'est pas/plus disponible sur Kali au même titre que snort.``
+**Reponse :**  L'outil Fragroute n'étant pas disponible sur notre machine virtuelle/physique nous n'avons pas pu effectuer la manipulation. Nous avons essayé d'installer l’outil de plusieurs manières (compilation des sources, recherche sur les dépôts de kali et autres) mais il n'est pas/plus disponible sur Kali au même titre que snort.
 
 ---
 
@@ -559,7 +559,7 @@ Modifier le fichier `myrules.rules` pour que snort utiliser le `Frag3 Preprocess
 
 ---
 
-**Reponse :**  
+**Reponse :**  Même chose que pour la __23__
 
 ---
 
@@ -586,7 +586,7 @@ Modifier le fichier `myrules.rules` pour que snort utiliser le `Frag3 Preprocess
 
 ---
 
-**Reponse :**  Au vue de ses nombreuses fonctionnalité, snort est un outils complet et très puissant et d'autant plus intéressant qu'il peut s'améliorer à l'aide de divers module (preprocessor).
+**Reponse :**  Au vue de ses nombreuses fonctionnalité, snort est un outils complet et très puissant et d'autant plus intéressant qu'il peut s'améliorer à l'aide de divers module (preprocessor). Il est regrettable qu'il soit plus fastidieux de l'installer depuis qu'il a disparu des dépôts Kali.
 
 ---
 
